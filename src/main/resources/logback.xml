@@ -24,23 +24,23 @@
     <appender name="EMAIL" class="ch.qos.logback.classic.net.SMTPAppender">
         <smtpHost>smtp.gmail.com</smtpHost>
         <smtpPort>587</smtpPort>
-        <username>your_email@gmail.com</username>
-        <password>nriowrlzbrbmyngp</password>
+        <username>${SMTP_USERNAME}</username>
+        <password>${SMTP_PASSWORD}</password>
+        <STARTTLS>true</STARTTLS>
 
-        <to>your_email@gmail.com</to>
+        <to>romangarnaga972@gmail.com</to>
         <from>travelapp-logger@gmail.com</from>
         <subject>[TravelApp] CRITICAL ERROR</subject>
 
-        <!-- Тільки для ERROR -->
-        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+        <!-- Фільтр: тільки ERROR -->
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
             <level>ERROR</level>
-            <onMatch>ACCEPT</onMatch>
-            <onMismatch>DENY</onMismatch>
         </filter>
 
-        <encoder>
-            <pattern>%date %-5level %logger - %msg%n</pattern>
-        </encoder>
+        <!-- Формат листа -->
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>%date %-5level [%thread] %logger{36} - %msg%n</pattern>
+        </layout>
     </appender>
 
     <!-- === ROOT LOGGER === -->
